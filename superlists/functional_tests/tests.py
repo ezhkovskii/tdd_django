@@ -8,11 +8,12 @@ from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 
 from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 MAX_WAIT = 10
 
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
     """тест нового посетителя"""
 
     def setUp(self):
@@ -102,8 +103,8 @@ class NewVisitorTest(LiveServerTestCase):
         '''тест макета и стилевого оформления'''
 
         # Эдит открывает домашнюю страницу
-        self.browser.get(self.live_server_url)
         self.browser.set_window_size(1024, 768)
+        self.browser.get(self.live_server_url)
         # Она замечает, что поле ввода аккуратно центрировано
         inputbox = self.browser.find_element(By.ID, 'id_new_item')
         self.assertAlmostEqual(
