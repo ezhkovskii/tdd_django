@@ -152,7 +152,7 @@ cython_debug/
 
 settings_local.py
 
-/staticfiles/
+staticfiles
 
 # End of https://www.toptal.com/developers/gitignore/api/django
 
