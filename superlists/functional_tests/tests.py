@@ -1,5 +1,5 @@
 import time
-import unittest
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -7,7 +7,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from webdriver_manager.chrome import ChromeDriverManager
 
-from django.test import LiveServerTestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 MAX_WAIT = 10
@@ -19,6 +18,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         """установка"""
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         """закрытие"""
